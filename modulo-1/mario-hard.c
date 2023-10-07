@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    int size = get_positive("size: ");
+    int height = get_positive_int("Height: ");
 
-    draw_pyramid(size, true, true);
+    draw_pyramid(height, true, true);
 }

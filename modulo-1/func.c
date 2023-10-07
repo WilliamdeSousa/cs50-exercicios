@@ -3,12 +3,22 @@
 #include <cs50.h>
 #include "func.h"
 
-int get_positive(string prompt)
+int get_positive_int(string prompt)
 {
     int num;
     do
     {
         num = get_int("%s", prompt);
+    } while (num <= 0);
+    return num;
+}
+
+float get_positive_float(string prompt)
+{
+    float num;
+    do
+    {
+        num = get_float("%s", prompt);
     } while (num <= 0);
     return num;
 }
@@ -21,13 +31,13 @@ void draw_chars(char c, int repets)
     }
 }
 
-void draw_pyramid(int size, bool left, bool right)
+void draw_pyramid(int height, bool left, bool right)
 {
-    for (int i=0; i<size; i++)
+    for (int i=0; i<height; i++)
     {
         if (left) 
         {
-            left_line(size, i);
+            left_line(height, i);
         }
         if (left && right)
         {
@@ -35,20 +45,36 @@ void draw_pyramid(int size, bool left, bool right)
         }
         if (right)
         {
-            right_line(size, i);
+            right_line(height, i);
         }
         printf("\n");
     }
 }
 
-void left_line(int size, int line)
+void left_line(int height, int line)
 {
-    draw_chars(' ', size-line-1);
+    draw_chars(' ', height-line-1);
     draw_chars('#', line + 1);
 }
 
-void right_line(int size, int line)
+void right_line(int height, int line)
 {
     draw_chars('#', line + 1);
-    draw_chars(' ', size-line-1);
+    draw_chars(' ', height-line-1);
+}
+
+int calc_coins(int cash)
+{
+    int coins = 0;
+    
+    int coin_list[4] = {25, 10, 5, 1};
+
+    for (int i=0; i<4; i++)
+    {
+        while (cash >= coin_list[i]) {
+            coins++;
+            cash -= coin_list[i];
+        }
+    }
+    return coins;
 }

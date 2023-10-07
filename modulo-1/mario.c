@@ -4,7 +4,7 @@
 #include "func.h"
 
 int main(void) {
-    int size = get_positive("size: ");
+    int height = get_positive_int("Height: ");
     
-    draw_pyramid(size, true, false);
+    draw_pyramid(height, true, false);
 }
